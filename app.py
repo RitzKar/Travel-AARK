@@ -8,16 +8,17 @@ from openai import OpenAI
 with st.sidebar:
   openai_api_key = st.text_input ("OpenAI API Key", type="password")
 
-st.title("AD AARK: AI Powered Ad Magic")
+st.title("Travel AARK: Planning trip made easier")
 st.header("A streamlit chatbot powered by OpenAI:")
-st.image("AI_ad.jpg")
+st.image("world_map.png")
 
 st.subheader("Please select your options")
 # Radio button with horizontal layout for ad_type
-ad_type = st.radio("What type of Ads do you want?",
-['Display', 'Video', 'Social Media', 'Search', 'Native'], horizontal=True)
+ad_type = st.radio("Which continent do you want to travel?"),
+['Americas', 'Australia', 'Europe', 'Asia', 'Africa'], horizontal=True)
 #st.write(f"You chose: {ad_type}")
 
+#Once the selection is made the corresponding tourist spots will be display
 # Radio button with horizontal layout for ad_platform
 ad_platform = st.radio("What Ad platform do you want?",
 ['Facebook', 'Google', 'Instagram', 'LinkedIn'], horizontal=True)
