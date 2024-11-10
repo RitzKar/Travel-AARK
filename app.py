@@ -14,7 +14,7 @@ st.image("world_map.png")
 
 st.subheader("Please select your options")
 # Radio button with horizontal layout for ad_type
-ad_type = st.radio("Which continent do you want to travel?"),
+ad_type = st.radio("Which continent do you want to travel?",
 ['Americas', 'Australia', 'Europe', 'Asia', 'Africa'], horizontal=True)
 #st.write(f"You chose: {ad_type}")
 
