@@ -32,6 +32,7 @@ st.subheader("Budget")
 
 budget = st.slider('How much are you willing to pay per night?', 100, 10000, 200)
 
+# add a rag 
 
 # Submit button
 if st.button("Submit"):
