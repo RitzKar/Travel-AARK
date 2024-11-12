@@ -13,24 +13,31 @@ st.header("A streamlit chatbot powered by OpenAI:")
 st.image("world_map.png")
 
 st.subheader("Please select your options")
-# Radio button with horizontal layout for ad_type
-ad_type = st.radio("Which continent do you want to travel?",
+# Radio button with horizontal layout for continent
+continent = st.radio("Which continent do you want to travel?",
 ['Americas', 'Australia', 'Europe', 'Asia', 'Africa'], horizontal=True)
-#st.write(f"You chose: {ad_type}")
 
-#Once the selection is made the corresponding tourist spots will be display. 
-#To upload a csv file which contains all the tourist spots associated with a continent
-# Radio button with horizontal layout for ad_platform
+# Radio button with horizontal layout for activities
+st.write('Select your favorite activities')
+activity1 = st.checkbox('sightseeing')
+activity2 = st.checkbox('swimming')
+activity3 = st.checkbox('water sports')
+activity4 = st.checkbox('spa')
+activity5 = st.checkbox('Kids theme park')
+activity6 = st.checkbox('hiking')
+activity7 = st.checkbox('fitness')
+activities = activity1 + activity2 + activity3 + activity4 + activity5 + activity6 +activity7
 
-
-# Radio button with horizontal layout for ad_platform
-activities = st.radio("What activities do you want?",
-['Sightseeing', 'swimming', 'water sports', 'spa', 'Kids theme parks', 'Landmarks', 'Fitness', 'Fashion'], horizontal=True)
-#st.write(f"You chose: {ad_platform}")
+#activities = st.radio("What activities do you want?",
+#['Sightseeing', 'swimming', 'water sports', 'spa', 'Kids theme parks', 'Hiking', 'Fitness', 'Fashion'], horizontal=True)
 
 st.subheader("Budget")
 
-budget = st.slider('How much are you willing to pay per night?', 100, 10000, 200)
+budget = st.slider('How much are you willing to pay per night?', 100, 1000, 0)
+
+st.subheader("Days")
+
+days = st.slider('How many days do you want to stay?', 0, 20, 0)
 
 # add a rag 
 
@@ -38,9 +45,10 @@ budget = st.slider('How much are you willing to pay per night?', 100, 10000, 200
 if st.button("Submit"):
     st.write("Thank you for submitting the form")
     st.header("Based on selected options the following prompt is created:")
-    st.write(f"Consider {ad_type} online advertisements on {ad_platform} for {device_type} with {ad_placement} in {ad_location} for audience interested in {audience_interest}  and ad objective {ad_objective} with bidding strategy {bidding_strategy}. The ad will be aired in {time_of_day} and will be in {language}. The dimension of the ad is {ad_dimensions} and the network where it will be aired is {ad_network}. Can you do a comprehensive research and give me information on how this ad should be?")
+    st.write(f"Consider tourist places in {continent}. List the hotels with a budget of  ${budget} per night. List the places to acoomodate the activities such as {activities} for each of the {days} days")
     #if st.button("Select this prompt"):
-    question_to_answer=f"Consider {ad_type} online advertisements on {ad_platform} for {device_type} with {ad_placement} in {ad_location} for audience interested in {audience_interest}  and ad objective {ad_objective} with bidding strategy {bidding_strategy}. The ad will be aired in {time_of_day} and will be in {language}. The dimension of the ad is {ad_dimensions} and the network where it will be aired is {ad_network}. Can you do a comprehensive research and give me information on how this ad should be?"
+    question_to_answer=(f"Consider tourist places in {continent}. List the hotels with a budget of  ${budget} per night. List the places to acoomodate the activities such as  {activities}")
+    #if st.button("Select this prompt"):
     if not openai_api_key:
           st.info("Please add your OpenAI API key")
           st.stop()
@@ -48,7 +56,7 @@ if st.button("Submit"):
     completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
       messages=[
-        {"role": "system", "content": "You are a helpful assistant with extensive experience in advertising, data science and technical writing."},
+        {"role": "system", "content": "You are aa helpful travel agent with extensive experience in building travel packages for clients"},
         {"role": "user", "content": question_to_answer}])
     st.markdown(completion.choices[0].message.content)
 
