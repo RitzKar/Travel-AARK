@@ -16,18 +16,11 @@ st.subheader("Please select your options")
 # Radio button with horizontal layout for continent
 continent = st.radio("Which continent do you want to travel?",
 ['Americas', 'Australia', 'Europe', 'Asia', 'Africa'], horizontal=True)
+location = st.text_input('Do you have a city in mind?')
 
-# Radio button with horizontal layout for activities
-st.write('Select your favorite activities')
-activity1 = st.checkbox('sightseeing')
-activity2 = st.checkbox('swimming')
-activity3 = st.checkbox('water sports')
-activity4 = st.checkbox('spa')
-activity5 = st.checkbox('Kids theme park')
-activity6 = st.checkbox('hiking')
-activity7 = st.checkbox('fitness')
-activities = activity1 + activity2 + activity3 + activity4 + activity5 + activity6 +activity7
-
+activities = ["Sightseeing", "Swimming", "Water Sports", "Spa", "Theme parks", "Hiking", "Fitness"]
+selection = st.pills("Activities you want in your trip", activities, selection_mode="multi")
+#st.markdown(f"Your selected options: {selection}.")
 #activities = st.radio("What activities do you want?",
 #['Sightseeing', 'swimming', 'water sports', 'spa', 'Kids theme parks', 'Hiking', 'Fitness', 'Fashion'], horizontal=True)
 
@@ -45,9 +38,9 @@ days = st.slider('How many days do you want to stay?', 0, 20, 0)
 if st.button("Submit"):
     st.write("Thank you for submitting the form")
     st.header("Based on selected options the following prompt is created:")
-    st.write(f"Consider tourist places in {continent}. List the hotels with a budget of  ${budget} per night. List the places to acoomodate the activities such as {activities} for each of the {days} days")
+    st.write(f"Consider tourist places in {continent}. List the hotels with a budget of  ${budget} per night. List the places to acoomodate the activities such as {selection} for each of the {days} days")
     #if st.button("Select this prompt"):
-    question_to_answer=(f"Consider tourist places in {continent}. List the hotels with a budget of  ${budget} per night. List the places to acoomodate the activities such as  {activities}")
+    question_to_answer=(f"Consider tourist places in {continent}. Specifically the city {location} List the hotels with a budget of  ${budget} per night. List the places to acoomodate the activities such as  {selection}")
     #if st.button("Select this prompt"):
     if not openai_api_key:
           st.info("Please add your OpenAI API key")
