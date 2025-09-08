@@ -15,7 +15,7 @@ elif not os.path.exists(image_dir):
     client = openai.OpenAI(api_key=openai_api_key)
     response = client.images.generate(
         model="dall-e-3",
-        prompt=f"{city}",
+        prompt=f"Generate a famous landmark of the {city}"
         n=1,
         size="1024x1024"
     )
