@@ -1,6 +1,6 @@
 import os
 import streamlit as st
-import openai
+from openai import OpenAI
 
 def image_loader(city):
 image_dir = "images"  # your image folder
@@ -12,7 +12,7 @@ if os.path.exists(image_path):
 elif not os.path.exists(image_dir):
 
     def generate_image(prompt, api_key):
-    client = openai.OpenAI(api_key=api_key)
+    client = openai.OpenAI(api_key=openai_api_key)
     response = client.images.generate(
         model="dall-e-3",
         prompt=f"{city}",
